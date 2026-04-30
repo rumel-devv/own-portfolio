@@ -60,10 +60,12 @@ export default function Navbar() {
         <div className="flex items-center gap-2 md:gap-3">
 
           {/* Contact Button (Desktop & Tablet) */}
-          <button className="hidden sm:flex items-center gap-2 px-3 md:px-4 py-1.5 bg-[#13CBFC] text-white rounded-lg text-sm md:text-base hover:opacity-90 transition">
+        <Link href='/contact'>
+          <button className="hidden sm:flex items-center gap-2 px-3 md:px-4 py-1.5 bg-[#1ba1c6] text-white rounded-lg text-sm md:text-base hover:opacity-90 transition">
             <IoIosContact />
             Contact Me
           </button>
+        </Link>
 
           {/* Theme Toggle */}
           <ThemeToggle />
@@ -98,10 +100,12 @@ export default function Navbar() {
           ))}
 
           {/* Mobile Contact Button */}
-          <button className="flex items-center justify-center gap-2 px-4 py-2 bg-[#13CBFC] text-white rounded-lg text-sm">
+          <Link href='/contact'>
+          <button className="hidden sm:flex items-center gap-2 px-3 md:px-4 py-1.5 bg-[#1ba1c6] text-white rounded-lg text-sm md:text-base hover:opacity-90 transition">
             <IoIosContact />
             Contact Me
           </button>
+        </Link>
         </motion.div>
       )}
     </nav>

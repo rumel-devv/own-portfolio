@@ -28,14 +28,15 @@ export default function Education() {
   return (
     <section className="relative py-24 px-6 md:px-16 bg-background text-foreground dark:bg-gradient-to-br dark:from-[#05070d] dark:via-[#070a12] dark:to-black overflow-hidden">
 
-      {/* soft background glow */}
+      {/* background glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_60%)]" />
 
       {/* TITLE */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.6 }}
         className="text-center mb-20 relative z-10"
       >
         <h2 className="text-4xl md:text-5xl font-bold">
@@ -49,56 +50,68 @@ export default function Education() {
       {/* TIMELINE */}
       <div className="relative max-w-5xl mx-auto z-10">
 
-        {/* center glowing line */}
+        {/* center line */}
         <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-500/40 via-purple-500/20 to-transparent" />
 
-        <div className="space-y-16">
+        <div className="space-y-20">
 
           {education.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 60, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
+              initial={{ opacity: 0, y: 80 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{
+                duration: 0.6,
+                delay: i * 0.15,
+                ease: "easeOut",
+              }}
               className={`relative flex items-center ${
                 i % 2 === 0 ? "justify-start" : "justify-end"
               }`}
             >
 
               {/* DOT */}
-              <div className="absolute left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.6)]" />
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 0.4 }}
+                className="absolute left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-blue-500 shadow-[0_0_25px_rgba(59,130,246,0.7)]"
+              />
 
               {/* CARD */}
               <div
-                className={`
-                  w-full md:w-[45%] p-6 rounded-2xl relative
+                className="
+                  w-full md:w-[45%]
+                  p-6 rounded-2xl relative
                   bg-white/5 border border-white/10
                   backdrop-blur-xl
                   hover:scale-[1.02] transition
-                `}
+                "
               >
 
-                {/* glow overlay */}
+                {/* hover glow */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 hover:opacity-100 transition bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10" />
 
-                <div className="relative">
+                <div className="relative space-y-2">
 
-                  {/* ICON + YEAR */}
-                  <div className="flex items-center gap-2 text-blue-500 mb-2">
+                  {/* header */}
+                  <div className="flex items-center gap-2 text-blue-500">
                     <FaGraduationCap />
-                    <span className="text-sm">{item.year}</span>
+                    <span className="text-sm font-medium">
+                      {item.year}
+                    </span>
                   </div>
 
                   <h3 className="text-xl font-semibold">
                     {item.title}
                   </h3>
 
-                  <p className="text-sm text-gray-400 mt-1">
+                  <p className="text-sm text-gray-400">
                     {item.institute}
                   </p>
 
-                  <p className="text-sm text-gray-500 mt-3 leading-relaxed">
+                  <p className="text-sm text-gray-500 leading-relaxed">
                     {item.desc}
                   </p>
 

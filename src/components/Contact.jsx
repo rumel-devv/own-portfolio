@@ -11,44 +11,46 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 
-const ContactPage = () => {
+const ContactHome = () => {
   return (
-    <section className="relative py-24 px-6 md:px-16 bg-background text-foreground dark:bg-gradient-to-br dark:from-[#05070d] dark:via-[#070a12] dark:to-black overflow-hidden">
+    <section className="relative py-20 px-6 md:px-16 bg-background text-foreground dark:bg-gradient-to-br dark:from-[#05070d] dark:via-[#070a12] dark:to-black overflow-hidden">
 
       {/* background glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.10),transparent_60%)]" />
 
       {/* TITLE */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-14 relative z-10"
+        className="text-center mb-12 relative z-10"
       >
         <h2 className="text-4xl md:text-5xl font-bold">
-          Get In <span className="text-blue-500">Touch</span>
+          Let’s <span className="text-blue-500">Talk</span>
         </h2>
         <p className="text-gray-500 dark:text-gray-400 mt-2">
-          Feel free to contact me anytime
+          Got a project? I’m just one message away
         </p>
       </motion.div>
 
       {/* GRID */}
-      <div className="grid lg:grid-cols-2 gap-10 max-w-6xl mx-auto relative z-10">
+      <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto relative z-10">
 
-        {/* LEFT - INFO CARDS */}
-        <div className="space-y-6">
+        {/* LEFT - INFO */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="space-y-6"
+        >
 
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl"
-          >
-            <h3 className="text-xl font-semibold mb-4">
-              Contact Information
+          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl space-y-4">
+
+            <h3 className="text-xl font-semibold">
+              Contact Info
             </h3>
 
-            <div className="space-y-4 text-sm text-gray-400">
+            <div className="space-y-3 text-sm text-gray-400">
 
               <div className="flex items-center gap-3">
                 <FaPhone className="text-blue-500" />
@@ -66,30 +68,26 @@ const ContactPage = () => {
               </div>
 
             </div>
-          </motion.div>
+          </div>
 
-          {/* glow card */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
-            className="p-6 rounded-2xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 border border-white/10 backdrop-blur-xl"
-          >
+          {/* highlight card */}
+          <div className="p-6 rounded-2xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 border border-white/10 backdrop-blur-xl">
             <h3 className="text-lg font-semibold">
-              Let’s build something amazing 🚀
+              Available for Freelance Work 🚀
             </h3>
             <p className="text-sm text-gray-400 mt-2">
-              I’m available for freelance work and collaborations.
+              I can build modern websites, dashboards, and full-stack apps.
             </p>
-          </motion.div>
+          </div>
 
-        </div>
+        </motion.div>
 
-        {/* RIGHT - FORM */}
+        {/* RIGHT - MINI FORM */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
-          className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl space-y-5"
+          viewport={{ once: true }}
+          className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl space-y-4"
         >
 
           {/* NAME */}
@@ -116,7 +114,7 @@ const ContactPage = () => {
           <div className="relative">
             <FaCommentDots className="absolute left-3 top-3 text-gray-400" />
             <textarea
-              rows="5"
+              rows="4"
               placeholder="Your Message"
               className="w-full pl-10 py-3 rounded-lg bg-transparent border border-white/10 focus:border-blue-500 outline-none resize-none"
             />
@@ -129,8 +127,7 @@ const ContactPage = () => {
             className="
               flex items-center justify-center gap-2 w-full
               py-3 rounded-lg font-semibold
-              bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
-              text-white transition
+              bg-blue-500 hover:bg-blue-600 text-white transition
             "
           >
             <FaPaperPlane />
@@ -144,4 +141,4 @@ const ContactPage = () => {
   );
 };
 
-export default ContactPage;
+export default ContactHome;
