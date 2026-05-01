@@ -12,21 +12,21 @@ import {
   FaCode,
   FaCss3Alt,
   FaHtml5,
-  FaBolt,
   FaProjectDiagram,
 } from "react-icons/fa";
+import { TbBrandNextjs } from "react-icons/tb";
 
 const projects = [
   {
-    title: "Portfolio Website",
+    title: "AI photo generatin website",
     desc: "Modern personal portfolio built with Next.js and Tailwind CSS.",
-    image: "/projects/p1.png",
+    image: "/projects/pixen.png", // ✅ FIXED (from public folder)
     tech: [
-      { name: "React", icon: FaReact },
-      { name: "CSS", icon: FaCss3Alt },
+      { name: "Next", icon: TbBrandNextjs },
+      { name: "Talwind", icon: FaCss3Alt },
       { name: "Code", icon: FaCode },
     ],
-    demo: "#",
+    demo: "https://pixen-one.vercel.app",
     github: "#",
   },
   {
@@ -136,9 +136,11 @@ const ProjectsPage = () => {
               {/* BUTTONS */}
               <div className="flex gap-3 pt-3">
 
+                {/* ✅ FIXED: external link */}
                 <a
                   href={project.demo}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="
                     flex items-center gap-2 px-3 py-2 rounded-lg text-sm
                     bg-blue-500 hover:bg-blue-600 text-white transition
@@ -151,6 +153,7 @@ const ProjectsPage = () => {
                 <a
                   href={project.github}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="
                     flex items-center gap-2 px-3 py-2 rounded-lg text-sm
                     border border-white/20 hover:bg-white/10 transition

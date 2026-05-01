@@ -71,11 +71,11 @@ const Banner = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-8 lg:px-16 xl:px-32 bg-background text-foreground dark:bg-gradient-to-br dark:from-[#0b0f1a] dark:via-[#05070d] dark:to-black overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center px-4  bg-background text-foreground dark:bg-gradient-to-br sm:px-8 lg:px-16 xl:px-32 dark:from-[#0b0f1a] dark:via-[#05070d] dark:to-black overflow-hidden">
       {/* BACKGROUND */}
       <StarBackground />
 
-      <div className="relative z-10 w-full max-w-7xl flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-24">
+      <div className="relative z-10 w-full max-w-6xl flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-24">
         {/* LEFT SIDE */}
         <div className="flex-1 text-center lg:text-left space-y-6">
           {/* Badge */}
@@ -121,13 +121,13 @@ const Banner = () => {
           </motion.p>
 
           {/* 🔥 SOCIAL ICONS */}
-          <div className="flex gap-4 mt-4 justify-center lg:justify-start">
+          <div className="flex gap-2 mt-4 justify-center lg:justify-start">
             {[
-              { icon: FaFacebook, link: "https://facebook.com/" },
-              { icon: FaWhatsapp, link: "https://wa.me/8801XXXXXXXXX" },
-              { icon: FaGithub, link: "https://github.com/" },
-              { icon: FaLinkedin, link: "https://linkedin.com/" },
-              { icon: FaEnvelope, link: "mailto:your@email.com" },
+              { icon: FaFacebook, link: "https://www.facebook.com/mdrumel.ahmed.988711" },
+              { icon: FaWhatsapp, link: "https://wa.me/8801745671928" },
+              { icon: FaGithub, link: "https://github.com/rumel-devv" },
+              { icon: FaLinkedin, link: "https://www.linkedin.com/in/muhammed-rumel" },
+              { icon: FaEnvelope, link: "mailto:mdrumel.dev@gmail.com" },
             ].map((item, i) => {
               const Icon = item.icon;
 
@@ -170,7 +170,7 @@ const Banner = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-500 hover:bg-blue-600 text-white font-semibold transition w-full sm:w-auto"
+                className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 text-white font-semibold transition w-full sm:w-auto"
               >
                 <HiRefresh /> Hire Me
               </motion.button>
@@ -179,7 +179,7 @@ const Banner = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-gray-400 dark:border-white/30 hover:bg-black/5 dark:hover:bg-white/10 transition font-semibold w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-gray-400 dark:border-white/30 hover:bg-black/5 dark:hover:bg-white/10 transition font-semibold w-full sm:w-auto"
             >
               <FaDownload /> Download Resume
             </motion.button>
