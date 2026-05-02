@@ -20,23 +20,24 @@ const projects = [
   {
     title: "AI photo generatin website",
     desc: "Modern personal portfolio built with Next.js and Tailwind CSS.",
-    image: "/projects/pixen.png", // ✅ FIXED (from public folder)
+    image: "/pixgen.png",
     tech: [
       { name: "Next", icon: TbBrandNextjs },
-      { name: "Talwind", icon: FaCss3Alt },
+      { name: "Tailwind", icon: FaCss3Alt },
+       { name: "Database", icon: FaDatabase },
       { name: "Code", icon: FaCode },
     ],
     demo: "https://pixen-one.vercel.app",
     github: "#",
   },
   {
-    title: "E-commerce App",
-    desc: "Full stack shopping platform with authentication & cart system.",
-    image: "/projects/p2.png",
+    title: "Payyo Mobile Banking App",
+    desc: "Full stack banking platform with authentication & cart system.",
+    image: "/payo.png",
     tech: [
       { name: "React", icon: FaReact },
       { name: "Node.js", icon: FaNodeJs },
-      { name: "Database", icon: FaDatabase },
+     { name: "Code", icon: FaCode },
     ],
     demo: "#",
     github: "#",
@@ -136,7 +137,7 @@ const ProjectsPage = () => {
               {/* BUTTONS */}
               <div className="flex gap-3 pt-3">
 
-                {/* ✅ FIXED: external link */}
+                {/* ✅ DEMO FIXED */}
                 <a
                   href={project.demo}
                   target="_blank"
@@ -150,6 +151,7 @@ const ProjectsPage = () => {
                   Demo
                 </a>
 
+                {/* GITHUB */}
                 <a
                   href={project.github}
                   target="_blank"

@@ -121,12 +121,19 @@ const Banner = () => {
           </motion.p>
 
           {/* 🔥 SOCIAL ICONS */}
+          {/* 🔥 SOCIAL ICONS */}
           <div className="flex gap-2 mt-4 justify-center lg:justify-start">
             {[
-              { icon: FaFacebook, link: "https://www.facebook.com/mdrumel.ahmed.988711" },
+              {
+                icon: FaFacebook,
+                link: "https://www.facebook.com/mdrumel.ahmed.988711",
+              },
               { icon: FaWhatsapp, link: "https://wa.me/8801745671928" },
               { icon: FaGithub, link: "https://github.com/rumel-devv" },
-              { icon: FaLinkedin, link: "https://www.linkedin.com/in/muhammed-rumel" },
+              {
+                icon: FaLinkedin,
+                link: "https://www.linkedin.com/in/muhammed-rumel",
+              },
               { icon: FaEnvelope, link: "mailto:mdrumel.dev@gmail.com" },
             ].map((item, i) => {
               const Icon = item.icon;
@@ -136,28 +143,26 @@ const Banner = () => {
                   key={i}
                   href={item.link}
                   target="_blank"
-                  // 🔥 animation
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  whileHover={{
-                    scale: 1.15,
-                    y: -4,
-                  }}
+                  whileHover={{ scale: 1.15, y: -4 }}
                   whileTap={{ scale: 0.9 }}
                   className="
           w-11 h-11 flex items-center justify-center
-          rounded-full border-2 border-blue-700/80
-          text-white
-          bg-transparent
-          relative overflow-hidden
-          transition
+          rounded-full
+          border border-gray-300 dark:border-white/20
+          text-gray-700 dark:text-white
+          bg-white dark:bg-white/5
+          hover:bg-blue-500 hover:text-white
+          dark:hover:bg-blue-500
+          shadow-sm dark:shadow-none
+          transition relative overflow-hidden
         "
                 >
-                  {/* 🔥 hover glow effect */}
-                  <span className="absolute inset-0 bg-blue-500 opacity-0 hover:opacity-10 transition rounded-full"></span>
+                  {/* hover glow */}
+                  <span className="absolute inset-0 opacity-0 hover:opacity-10 bg-white dark:bg-white transition rounded-full"></span>
 
-                  {/* icon */}
                   <Icon className="relative z-10 text-lg" />
                 </motion.a>
               );

@@ -1,9 +1,11 @@
-import About from "@/components/About";
+
 import Banner from "@/components/Banner";
-import ContactHome from "@/components/Contact";
-import Education from "@/components/Edu";
 import Footer from "@/components/Footer";
-import ProjectsHome from "@/components/Project";
+import SkillsSection from "./skill/page";
+import ProjectsPage from "./projects/page";
+import About from "./about/page";
+import ContactPage from "./contact/page";
+
 
 
 
@@ -12,9 +14,9 @@ export default function Home() {
     <>
     <Banner/>
     <About/>
-    <Education/>
-    <ProjectsHome/>
-    <ContactHome/>
+    <ProjectsPage/>
+    <SkillsSection/>
+    <ContactPage/>
     <Footer/>
     </>
   );
