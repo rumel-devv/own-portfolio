@@ -71,7 +71,7 @@ const Banner = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4  bg-background text-foreground dark:bg-gradient-to-br sm:px-8 lg:px-16 xl:px-32 dark:from-[#0b0f1a] dark:via-[#05070d] dark:to-black overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center px-4  bg-background text-foreground dark:bg-gradient-to-br my-4 sm:px-8 lg:px-16 xl:px-32 dark:from-[#0b0f1a] dark:via-[#05070d] dark:to-black overflow-hidden">
       {/* BACKGROUND */}
       <StarBackground />
 
