@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 import {
   FaCircle,
@@ -26,40 +26,7 @@ const roles = [
   "UI/UX Enthusiast",
 ];
 
-// text animation
-const container = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.03 },
-  },
-};
-
-const letter = {
-  hidden: { opacity: 0, x: 30 },
-  visible: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: -20 },
-};
-
-function AnimatedText({ text }) {
-  return (
-    <motion.span
-      key={text}
-      variants={container}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      className="inline-flex"
-    >
-      {text.split("").map((char, i) => (
-        <motion.span key={i} variants={letter}>
-          {char}
-        </motion.span>
-      ))}
-    </motion.span>
-  );
-}
-
-const Banner = () => {
+export default function Banner() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -70,72 +37,55 @@ const Banner = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const socials = [
+    { icon: FaFacebook, link: "#" },
+    { icon: FaWhatsapp, link: "#" },
+    { icon: FaGithub, link: "#" },
+    { icon: FaLinkedin, link: "#" },
+    { icon: FaEnvelope, link: "#" },
+  ];
+
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4  bg-background text-foreground dark:bg-gradient-to-br my-4 sm:px-8 lg:px-16 xl:px-32 dark:from-[#0b0f1a] dark:via-[#05070d] dark:to-black overflow-hidden">
-      {/* BACKGROUND */}
+    <section className="relative flex items-center px-4 sm:px-6 lg:px-16 py-20 md:py-30 overflow-hidden bg-background text-foreground dark:bg-gradient-to-br dark:from-[#0b0f1a] dark:via-[#05070d] dark:to-black">
+
+      {/* BACKGROUND (SUBTLE FIXED) */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_60%)] animate-pulse opacity-60" />
       <StarBackground />
 
-      <div className="relative z-10 w-full max-w-6xl flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-24">
+      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12">
+
         {/* LEFT SIDE */}
-        <div className="flex-1 text-center lg:text-left space-y-6">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-black/10 dark:border-white/20 backdrop-blur-md"
-          >
+        <div className="flex-1 text-center lg:text-left space-y-3">
+
+          {/* STATUS BADGE */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-md">
             <FaCircle className="text-green-400 text-xs animate-pulse" />
-            <span className="text-sm">Available for Work</span>
-          </motion.div>
+            <span className="text-xs sm:text-sm">Available for Work</span>
+          </div>
 
-          {/* Name */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
-          >
-            Hi, I am <span className="text-blue-500">Muhammed Rumel</span>
-          </motion.h1>
+          {/* NAME */}
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+            Hi, I am{" "}
+            <span className="text-blue-400">Muhammed Rumel</span>
+          </h1>
 
-          {/* Role */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={roles[index]}
-              className="text-base sm:text-lg text-gray-500 dark:text-gray-300"
-            >
-              I am a{" "}
-              <span className="text-purple-500 font-semibold">
-                <AnimatedText text={roles[index]} />
-              </span>
-            </motion.div>
-          </AnimatePresence>
+          {/* ROLE */}
+          <p className="text-sm text-gray-500 dark:text-gray-300">
+            I am a{" "}
+            <span className="text-purple-500 font-semibold">
+              {roles[index]}
+            </span>
+          </p>
 
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-sm sm:text-base text-gray-500 dark:text-gray-400 max-w-xl mx-auto lg:mx-0"
-          >
-            I build modern, responsive, and high-performance web applications
-            using React, Next.js, and modern frontend tools.
-          </motion.p>
+          {/* DESCRIPTION */}
+          <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xl mx-auto lg:mx-0">
+            I build modern, responsive, and high-performance web applications.
+          </p>
 
-          {/* 🔥 SOCIAL ICONS */}
-          {/* 🔥 SOCIAL ICONS */}
-          <div className="flex gap-2 mt-4 justify-center lg:justify-start">
-            {[
-              {
-                icon: FaFacebook,
-                link: "https://www.facebook.com/mdrumel.ahmed.988711",
-              },
-              { icon: FaWhatsapp, link: "https://wa.me/8801745671928" },
-              { icon: FaGithub, link: "https://github.com/rumel-devv" },
-              {
-                icon: FaLinkedin,
-                link: "https://www.linkedin.com/in/muhammed-rumel",
-              },
-              { icon: FaEnvelope, link: "mailto:mdrumel.dev@gmail.com" },
-            ].map((item, i) => {
+          {/* SOCIAL ICONS (FIXED LIGHT + DARK) */}
+          <div className="flex gap-3 flex-wrap justify-center lg:justify-start mt-3">
+
+            {socials.map((item, i) => {
               const Icon = item.icon;
 
               return (
@@ -143,85 +93,64 @@ const Banner = () => {
                   key={i}
                   href={item.link}
                   target="_blank"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  whileHover={{ scale: 1.15, y: -4 }}
+                  whileHover={{ scale: 1.15, y: -3 }}
                   whileTap={{ scale: 0.9 }}
                   className="
-          w-11 h-11 flex items-center justify-center
-          rounded-full
-          border border-gray-300 dark:border-white/20
-          text-gray-700 dark:text-white
-          bg-white dark:bg-white/5
-          hover:bg-blue-500 hover:text-white
-          dark:hover:bg-blue-500
-          shadow-sm dark:shadow-none
-          transition relative overflow-hidden
-        "
+                    w-10 h-10 flex items-center justify-center rounded-full
+                    border border-gray-300 dark:border-white/15
+                    bg-white/70 dark:bg-white/5
+                    text-gray-700 dark:text-gray-200
+                    hover:bg-blue-500 hover:text-white
+                    backdrop-blur-md transition
+                  "
                 >
-                  {/* hover glow */}
-                  <span className="absolute inset-0 opacity-0 hover:opacity-10 bg-white dark:bg-white transition rounded-full"></span>
-
-                  <Icon className="relative z-10 text-lg" />
+                  <Icon className="text-lg" />
                 </motion.a>
               );
             })}
           </div>
 
-          {/* BUTTONS */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-6 justify-center lg:justify-start">
+          {/* BUTTONS (RESPONSIVE FIXED) */}
+          <div className="flex flex-col sm:flex-row gap-3 mt-4 justify-center lg:justify-start">
+
             <Link href="/contact">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 text-white font-semibold transition w-full sm:w-auto"
-              >
+              <button className="w-full sm:w-auto px-4 py-2 rounded-xl bg-blue-500 text-white text-sm flex items-center justify-center gap-2">
                 <HiRefresh /> Hire Me
-              </motion.button>
+              </button>
             </Link>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-gray-400 dark:border-white/30 hover:bg-black/5 dark:hover:bg-white/10 transition font-semibold w-full sm:w-auto"
-            >
-              <FaDownload /> Download Resume
-            </motion.button>
+            <button className="w-full sm:w-auto px-4 py-2 rounded-xl border border-gray-300 dark:border-white/20 text-sm flex items-center justify-center gap-2">
+              <FaDownload /> Resume
+            </button>
+
           </div>
         </div>
 
-        {/* RIGHT IMAGE */}
+        {/* RIGHT IMAGE (SPACE FIXED + CLEAN GLOW) */}
         <div className="flex-1 flex justify-center lg:justify-end">
-          <div className="relative w-[250px] sm:w-[320px] md:w-[380px] lg:w-[420px]">
-            {/* glow */}
-            <div className="absolute -inset-6 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 blur-3xl opacity-40 animate-pulse"></div>
 
-            {/* ring */}
-            <div className="absolute -inset-2 rounded-full border border-black/10 dark:border-white/20"></div>
+          <div className="relative w-[200px] sm:w-[280px] md:w-[340px] lg:w-[400px]">
 
-            {/* smooth floating image */}
+            {/* CLEAN GLOW */}
+            <div className="absolute inset-0 scale-90 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 blur-2xl opacity-25" />
+
             <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, y: [0, -4, 0] }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              animate={{ y: [0, -3, 0] }}
+              transition={{ duration: 5, repeat: Infinity }}
               className="relative"
             >
               <Image
                 src={profileImg}
                 alt="profile"
-                className="rounded-full border-4 border-black/10 dark:border-white/20 w-full h-auto"
+                className="rounded-full border-4 border-white/10 w-full h-auto"
+                priority
               />
             </motion.div>
+
           </div>
         </div>
-      </div>
-    </div>
-  );
-};
 
-export default Banner;
+      </div>
+    </section>
+  );
+}

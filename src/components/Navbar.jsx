@@ -1,130 +1,171 @@
 "use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
-import { FiMenu, FiX, FiHome, FiCode, FiUserPlus } from "react-icons/fi";
-import { RiGraduationCapFill } from "react-icons/ri";
-import { GrProjects } from "react-icons/gr";
-import { IoIosContact } from "react-icons/io";
-import Image from "next/image";
 
+import {
+  FiHome,
+  FiUser,
+  FiCode,
+  FiLayers,
+  FiBook,
+  FiMail,
+  FiMenu,
+  FiX,
+} from "react-icons/fi";
 
-
-
-const navLinks = [
-  { name: "Home", href: "/", icon: <FiHome /> },
-  { name: "About", href: "/about", icon: <FiUserPlus /> },
-  { name: "Skills", href: "/skill", icon: <FiCode /> },
-  { name: "Projects", href: "/projects", icon: <GrProjects /> },
-  { name: "Education", href: "/education", icon: <RiGraduationCapFill /> },
+const navItems = [
+  { id: "home", label: "Home", icon: FiHome },
+  { id: "about", label: "About", icon: FiUser },
+  { id: "projects", label: "Projects", icon: FiLayers },
+  { id: "skills", label: "Skills", icon: FiCode },
+  { id: "education", label: "Education", icon: FiBook },
+  { id: "contact", label: "Contact", icon: FiMail },
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
+  const [active, setActive] = useState("home");
   const [open, setOpen] = useState(false);
+
+  // ✅ FIX 1: Always go to top on refresh
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+
+  // ✅ FIX 2: Stable Scroll Spy
+  useEffect(() => {
+    const handleScroll = () => {
+      let current = "home";
+
+      for (const item of navItems) {
+        const el = document.getElementById(item.id);
+        if (!el) continue;
+
+        const rect = el.getBoundingClientRect();
+
+        // middle screen detection (stable)
+        if (rect.top <= 200 && rect.bottom >= 200) {
+          current = item.id;
+          break;
+        }
+      }
+
+      setActive(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // run on load
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // smooth scroll
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+
+    if (el) {
+      window.scrollTo({
+        top: el.offsetTop - 80,
+        behavior: "smooth",
+      });
+    }
+
+    setOpen(false);
+  };
 
   return (
     <>
-      {/* ✅ Sticky Navbar */}
-      <nav className="fixed top-0 left-0 w-full z-50 bg-white/70 dark:bg-gray-900/70 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
-        
-        <div className="w-full md:w-11/12 lg:w-10/12 mx-auto py-4 px-4 flex justify-between items-center">
+      {/* ================= DESKTOP NAV ================= */}
+      <div className="hidden md:flex fixed right-4 top-1/2 -translate-y-1/2 z-50">
+        <div className="flex flex-col gap-4 p-3 rounded-2xl 
+        bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 shadow-lg">
 
-          {/* Logo */}
-          <Link href="/" className="text-3xl font-bold text-[#13CBFC]">
-              <h2>M.R</h2>
-               </Link>
+          {/* Theme */}
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="flex justify-center mb-2"
+          >
+            <ThemeToggle />
+          </motion.div>
 
-          {/* Desktop Menu */}
-          <ul className="hidden md:flex gap-3 lg:gap-4 text-sm font-medium uppercase">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+          {/* Items */}
+          {navItems.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <motion.div
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.9 }}
+                className={`w-11 h-11 flex items-center justify-center rounded-full cursor-pointer transition
+                ${
+                  active === item.id
+                    ? "bg-[#13CBFC] text-white"
+                    : "text-gray-400 hover:text-white hover:bg-[#13CBFC]/30"
+                }`}
+              >
+                <Icon size={20} />
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ================= MOBILE TOP BAR ================= */}
+      <div className="md:hidden fixed top-4 w-full px-4 z-50 flex justify-between items-center">
+
+        <motion.div
+          whileTap={{ scale: 0.9 }}
+          className="w-10 h-10 flex items-center justify-center rounded-lg 
+          bg-white/10 backdrop-blur border border-white/20"
+        >
+          <ThemeToggle />
+        </motion.div>
+
+        <button
+          onClick={() => setOpen(!open)}
+          className="p-2 rounded-lg bg-white/10 backdrop-blur border border-white/20"
+        >
+          {open ? <FiX size={22} /> : <FiMenu size={22} />}
+        </button>
+      </div>
+
+      {/* ================= MOBILE MENU ================= */}
+      {open && (
+        <motion.div
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          className="md:hidden fixed top-0 right-0 h-full w-64 z-40 
+          bg-white dark:bg-gray-900 shadow-xl p-6"
+        >
+          <div className="flex flex-col gap-6 mt-16">
+
+            {navItems.map((item) => {
+              const Icon = item.icon;
 
               return (
-                <motion.li key={link.href} whileHover={{ scale: 1.05 }}>
-                  <Link
-                    href={link.href}
-                    className={`flex items-center gap-2 px-2 lg:px-3 py-1 rounded-md transition ${
-                      isActive
-                        ? "bg-[#13CBFC]/20 text-[#13CBFC] font-semibold"
-                        : "text-gray-700 dark:text-gray-300 hover:bg-[#13CBFC]/10"
-                    }`}
-                  >
-                    {link.icon}
-                    {link.name}
-                  </Link>
-                </motion.li>
+                <div
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`flex items-center gap-3 cursor-pointer text-lg transition
+                  ${
+                    active === item.id
+                      ? "text-[#13CBFC] font-semibold"
+                      : "text-gray-600 dark:text-gray-300"
+                  }`}
+                >
+                  <Icon />
+                  {item.label}
+                </div>
               );
             })}
-          </ul>
 
-          {/* Right Side */}
-          <div className="flex items-center gap-2 md:gap-3">
-
-            {/* 🔥 Animated Contact Button */}
-            <Link href="/contact">
-              <motion.button
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.95 }}
-                className="hidden sm:flex items-center gap-2 px-4 py-2 bg-[#1ba1c6] text-white rounded-lg text-sm md:text-base relative overflow-hidden group shadow-lg hover:shadow-cyan-400/50 transition"
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  <IoIosContact />
-                  Contact Me
-                </span>
-
-                {/* Glow Effect */}
-                <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition duration-300"></span>
-              </motion.button>
-            </Link>
-
-            {/* Theme Toggle */}
-            <ThemeToggle />
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setOpen(!open)}
-              className="md:hidden text-2xl"
-            >
-              {open ? <FiX /> : <FiMenu />}
-            </button>
           </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="md:hidden mt-2 mx-4 flex flex-col gap-3 p-4 rounded-xl bg-white dark:bg-gray-900 shadow-lg"
-          >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-[#13CBFC]/10 text-sm"
-              >
-                {link.icon}
-                {link.name}
-              </Link>
-            ))}
-
-            {/* Mobile Contact Button */}
-            <Link href="/contact">
-              <button className="flex items-center gap-2 px-4 py-2 bg-[#1ba1c6] text-white rounded-lg text-sm">
-                <IoIosContact />
-                Contact Me
-              </button>
-            </Link>
-          </motion.div>
-        )}
-      </nav>
-
-      {/* ⚠️ Important Spacer (so content doesn't hide behind navbar) */}
-      <div className="h-20"></div>
+        </motion.div>
+      )}
     </>
   );
 }

@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
       <body className="bg-background text-foreground">
         <NextThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
         >
           <Navbar />

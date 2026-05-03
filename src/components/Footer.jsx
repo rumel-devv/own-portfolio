@@ -13,25 +13,33 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative mt-20 px-6 md:px-16 py-12 bg-background text-foreground dark:bg-[#05070d]">
+    <footer className="relative mt-14 px-4 md:px-12 py-10 bg-background text-foreground dark:bg-[#05070d]">
 
-      {/* TOP BORDER (theme perfect) */}
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-400/40 dark:via-white/20 to-transparent"></div>
+      {/* top glow line */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
 
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
 
-        {/* LEFT */}
-        <div className="text-center md:text-left space-y-1">
-          <h2 className="text-2xl font-bold tracking-wide">
-            Muhammed <span className="text-blue-500">Rumel</span> Ahmed
+        {/* LEFT NAME */}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="text-center md:text-left"
+        >
+          <h2 className="text-2xl md:text-3xl font-bold tracking-wide">
+            <span className="text-blue-500">Muhammed</span>{" "}
+            <span className="text-white dark:text-white/90">
+              Rumel Ahmed
+            </span>
           </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
-            Frontend Developer • React • Next.js
-          </p>
-        </div>
 
-        {/* SOCIAL ICONS */}
-        <div className="flex items-center gap-4 text-xl">
+          <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400 mt-1">
+            Frontend Developer • React • Next.js • UI Builder
+          </p>
+        </motion.div>
+
+        {/* SOCIAL ICONS (GRADIENT BORDER + ANIMATION) */}
+        <div className="flex items-center gap-4">
+
           {icons.map((item, i) => {
             const Icon = item.icon;
 
@@ -40,30 +48,40 @@ const Footer = () => {
                 key={i}
                 href={item.link}
                 target="_blank"
-                whileHover={{ scale: 1.2, y: -3 }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.1 }}
+
+                whileHover={{
+                  scale: 1.18,
+                  y: -5,
+                }}
                 whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="
-                  w-11 h-11 flex items-center justify-center
-                  rounded-full
-                  border border-gray-300 dark:border-white/20
-                  text-gray-700 dark:text-white
-                  bg-white/60 dark:bg-white/5
-                  hover:bg-blue-500 hover:text-white
-                  transition
-                  shadow-sm
-                "
+
+                className="relative w-11 h-11 flex items-center justify-center rounded-full"
               >
-                <Icon />
+
+                {/* GRADIENT BORDER */}
+                <span className="absolute inset-0 rounded-full p-[1px] bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-pulse">
+
+                  {/* INNER GLASS */}
+                  <span className="flex items-center justify-center w-full h-full rounded-full bg-[#05070d]/80 backdrop-blur-md text-gray-300 hover:text-white transition">
+
+                    <Icon className="text-lg" />
+
+                  </span>
+
+                </span>
+
               </motion.a>
             );
           })}
-        </div>
 
+        </div>
       </div>
 
-      {/* BOTTOM TEXT */}
-      <div className="text-center text-xs text-gray-500 dark:text-gray-400 mt-10">
+      {/* bottom text */}
+      <div className="text-center text-xs text-gray-500 dark:text-gray-400 mt-8">
         © {new Date().getFullYear()} Muhammed Rumel Ahmed. All rights reserved.
       </div>
 
