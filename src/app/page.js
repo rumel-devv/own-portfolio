@@ -1,10 +1,11 @@
 import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
-import SkillsSection from "./skill/page";
-import ProjectsPage from "./projects/page";
-import About from "./about/page";
-import ContactPage from "./contact/page";
-import Education from "./education/page";
+import SkillsSection from "./(skills)/skill/page";
+
+import About from "./(about)/about/page";
+import ContactPage from "./(contact)/contact/page";
+import Education from "./(education)/education/page";
+import ProjectsPage from "./(project)/projects/page";
 
 export default function Home() {
   return (
@@ -20,7 +21,7 @@ export default function Home() {
       </section>
 
       <section id="projects">
-        <ProjectsPage />
+        <ProjectsPage/>
       </section>
 
        <section id="skills">

@@ -6,8 +6,23 @@ import { useEffect, useState } from "react";
 export default function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [trail, setTrail] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // 🔥 detect mobile / touch device
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia("(pointer: coarse)").matches);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return; // ❌ disable cursor on mobile
+
     const move = (e) => {
       const x = e.clientX;
       const y = e.clientY;
@@ -24,13 +39,16 @@ export default function CustomCursor() {
 
       setTimeout(() => {
         setTrail((prev) => prev.filter((p) => p.id !== newPoint.id));
-      }, 500);
+      }, 400);
     };
 
     window.addEventListener("mousemove", move);
 
     return () => window.removeEventListener("mousemove", move);
-  }, []);
+  }, [isMobile]);
+
+  // ❌ Mobile e kuchu render hobe na
+  if (isMobile) return null;
 
   return (
     <>
@@ -43,8 +61,8 @@ export default function CustomCursor() {
         }}
         transition={{
           type: "spring",
-          stiffness: 500,
-          damping: 30,
+          stiffness: 600,
+          damping: 35,
         }}
       >
         <div
@@ -62,7 +80,7 @@ export default function CustomCursor() {
         {trail.map((p) => (
           <motion.div
             key={p.id}
-            initial={{ opacity: 0.8, scale: 1 }}
+            initial={{ opacity: 0.7, scale: 1 }}
             animate={{ opacity: 0, scale: 0.3 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}

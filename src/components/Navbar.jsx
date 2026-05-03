@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./ThemeToggle";
 
 import {
@@ -28,12 +28,10 @@ export default function Navbar() {
   const [active, setActive] = useState("home");
   const [open, setOpen] = useState(false);
 
-  // ✅ FIX 1: Always go to top on refresh
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
-  // ✅ FIX 2: Stable Scroll Spy
   useEffect(() => {
     const handleScroll = () => {
       let current = "home";
@@ -44,7 +42,6 @@ export default function Navbar() {
 
         const rect = el.getBoundingClientRect();
 
-        // middle screen detection (stable)
         if (rect.top <= 200 && rect.bottom >= 200) {
           current = item.id;
           break;
@@ -55,12 +52,11 @@ export default function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // run on load
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // smooth scroll
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
 
@@ -76,30 +72,20 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ================= DESKTOP NAV ================= */}
+      {/* ================= DESKTOP ================= */}
       <div className="hidden md:flex fixed right-4 top-1/2 -translate-y-1/2 z-50">
         <div className="flex flex-col gap-4 p-3 rounded-2xl 
         bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 shadow-lg">
 
-          {/* Theme */}
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="flex justify-center mb-2"
-          >
-            <ThemeToggle />
-          </motion.div>
+          <ThemeToggle />
 
-          {/* Items */}
           {navItems.map((item) => {
             const Icon = item.icon;
 
             return (
-              <motion.div
+              <div
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.9 }}
                 className={`w-11 h-11 flex items-center justify-center rounded-full cursor-pointer transition
                 ${
                   active === item.id
@@ -108,7 +94,7 @@ export default function Navbar() {
                 }`}
               >
                 <Icon size={20} />
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -116,14 +102,7 @@ export default function Navbar() {
 
       {/* ================= MOBILE TOP BAR ================= */}
       <div className="md:hidden fixed top-4 w-full px-4 z-50 flex justify-between items-center">
-
-        <motion.div
-          whileTap={{ scale: 0.9 }}
-          className="w-10 h-10 flex items-center justify-center rounded-lg 
-          bg-white/10 backdrop-blur border border-white/20"
-        >
-          <ThemeToggle />
-        </motion.div>
+        <ThemeToggle />
 
         <button
           onClick={() => setOpen(!open)}
@@ -133,39 +112,49 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* ================= MOBILE MENU ================= */}
-      {open && (
-        <motion.div
-          initial={{ x: "100%" }}
-          animate={{ x: 0 }}
-          className="md:hidden fixed top-0 right-0 h-full w-64 z-40 
-          bg-white dark:bg-gray-900 shadow-xl p-6"
-        >
-          <div className="flex flex-col gap-6 mt-16">
+      {/* ================= MOBILE MENU (FIXED ANIMATION) ================= */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ y: -40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -40, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="
+              md:hidden fixed top-0 left-0 w-full z-40
+              bg-white dark:bg-gray-900
+              shadow-xl rounded-b-2xl
+              px-6 pt-20 pb-8
+            "
+          >
+            <div className="flex flex-col gap-6">
 
-            {navItems.map((item) => {
-              const Icon = item.icon;
+              {navItems.map((item, i) => {
+                const Icon = item.icon;
 
-              return (
-                <div
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center gap-3 cursor-pointer text-lg transition
-                  ${
-                    active === item.id
-                      ? "text-[#13CBFC] font-semibold"
-                      : "text-gray-600 dark:text-gray-300"
-                  }`}
-                >
-                  <Icon />
-                  {item.label}
-                </div>
-              );
-            })}
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`
+                      flex items-center gap-3 cursor-pointer text-lg transition
+                      ${
+                        active === item.id
+                          ? "text-[#13CBFC] font-semibold"
+                          : "text-gray-600 dark:text-gray-300"
+                      }
+                    `}
+                  >
+                    <Icon />
+                    {item.label}
+                  </div>
+                );
+              })}
 
-          </div>
-        </motion.div>
-      )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

@@ -21,9 +21,7 @@ import Link from "next/link";
 
 const roles = [
   "Frontend Developer",
-  "React Developer",
-  "Next.js Developer",
-  "UI/UX Enthusiast",
+  "Mern Stack Developer",
 ];
 
 // 🔥 letter animation config
@@ -67,13 +65,13 @@ export default function Banner() {
     return () => clearInterval(interval);
   }, []);
 
-  const socials = [
-    { icon: FaFacebook, link: "#" },
-    { icon: FaWhatsapp, link: "#" },
-    { icon: FaGithub, link: "#" },
-    { icon: FaLinkedin, link: "#" },
-    { icon: FaEnvelope, link: "#" },
-  ];
+const socials = [
+  { icon: FaFacebook, link: "https://www.facebook.com/mdrumel.ahmed.988711" },
+  { icon: FaWhatsapp, link: "https://wa.me/8801745671928" },
+  { icon: FaGithub, link: "https://github.com/rumel-devv" },
+  { icon: FaLinkedin, link: "https://www.linkedin.com/in/muhammed-rumel" },
+  { icon: FaEnvelope, link: "mailto:mdrumel.dev@gmail.com" },
+];
 
   return (
     <section className="relative flex items-center px-4 sm:px-6 lg:px-20 py-20 md:py-28 overflow-hidden bg-background text-foreground dark:bg-gradient-to-br dark:from-[#0b0f1a] dark:via-[#05070d] dark:to-black">
@@ -153,13 +151,13 @@ export default function Banner() {
           {/* buttons */}
           <div className="flex flex-col sm:flex-row gap-3 mt-5 justify-center lg:justify-start">
 
-            <Link href="/contact">
+            <Link href="https://wa.me/8801745671928">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="w-full sm:w-auto px-5 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 text-white text-sm flex items-center justify-center gap-2 shadow-md"
               >
-                <HiRefresh /> Hire Me
+                <HiRefresh />Hire Me
               </motion.button>
             </Link>
 

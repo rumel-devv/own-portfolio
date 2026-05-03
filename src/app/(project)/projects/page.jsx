@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import React from "react";
 import Image from "next/image";
@@ -15,6 +15,8 @@ import {
   FaProjectDiagram,
 } from "react-icons/fa";
 import { TbBrandNextjs } from "react-icons/tb";
+
+
 
 const projects = [
   {
@@ -79,7 +81,7 @@ export default function ProjectsPage() {
           My <span className="text-blue-500">Projects</span>
         </h2>
 
-        <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 mt-1">
+        <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 mt-3">
           Real-world applications I built
         </p>
       </motion.div>
