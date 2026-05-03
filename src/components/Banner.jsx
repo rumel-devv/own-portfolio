@@ -86,10 +86,22 @@ const socials = [
         <div className="flex-1 text-center lg:text-left space-y-4">
 
           {/* badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-md">
-            <FaCircle className="text-green-400 text-xs animate-pulse" />
-            <span className="text-xs sm:text-sm">Available for Work</span>
-          </div>
+        <div className="
+  inline-flex items-center gap-2 px-3 py-1 rounded-full
+  bg-green-50 dark:bg-white/10
+  border border-green-200 dark:border-white/10
+  backdrop-blur-md
+  transition
+">
+  <FaCircle className="text-green-500 dark:text-green-400 text-xs animate-pulse" />
+
+  <span className="
+    text-xs sm:text-sm
+    text-green-700 dark:text-gray-300
+  ">
+    Available for Work
+  </span>
+</div>
 
           {/* name */}
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight">
