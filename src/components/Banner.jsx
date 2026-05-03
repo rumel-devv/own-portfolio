@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import {
   FaCircle,
@@ -26,6 +26,37 @@ const roles = [
   "UI/UX Enthusiast",
 ];
 
+// 🔥 letter animation config
+const container = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.04 },
+  },
+};
+
+const letter = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
+};
+
+function AnimatedText({ text }) {
+  return (
+    <motion.span
+      key={text}
+      variants={container}
+      initial="hidden"
+      animate="visible"
+      className="inline-flex"
+    >
+      {text.split("").map((char, i) => (
+        <motion.span key={i} variants={letter}>
+          {char}
+        </motion.span>
+      ))}
+    </motion.span>
+  );
+}
+
 export default function Banner() {
   const [index, setIndex] = useState(0);
 
@@ -33,7 +64,6 @@ export default function Banner() {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % roles.length);
     }, 2500);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -46,45 +76,50 @@ export default function Banner() {
   ];
 
   return (
-    <section className="relative flex items-center px-4 sm:px-6 lg:px-16 py-20 md:py-30 overflow-hidden bg-background text-foreground dark:bg-gradient-to-br dark:from-[#0b0f1a] dark:via-[#05070d] dark:to-black">
+    <section className="relative flex items-center px-4 sm:px-6 lg:px-20 py-20 md:py-28 overflow-hidden bg-background text-foreground dark:bg-gradient-to-br dark:from-[#0b0f1a] dark:via-[#05070d] dark:to-black">
 
-      {/* BACKGROUND (SUBTLE FIXED) */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_60%)] animate-pulse opacity-60" />
+      {/* background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.15),transparent_60%)] animate-pulse opacity-60" />
       <StarBackground />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-8 lg:gap-12">
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center justify-between gap-10 lg:gap-16">
 
-        {/* LEFT SIDE */}
-        <div className="flex-1 text-center lg:text-left space-y-3">
+        {/* LEFT */}
+        <div className="flex-1 text-center lg:text-left space-y-4">
 
-          {/* STATUS BADGE */}
+          {/* badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/10 backdrop-blur-md">
             <FaCircle className="text-green-400 text-xs animate-pulse" />
             <span className="text-xs sm:text-sm">Available for Work</span>
           </div>
 
-          {/* NAME */}
+          {/* name */}
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold leading-tight">
             Hi, I am{" "}
             <span className="text-blue-400">Muhammed Rumel</span>
           </h1>
 
-          {/* ROLE */}
-          <p className="text-sm text-gray-500 dark:text-gray-300">
-            I am a{" "}
-            <span className="text-purple-500 font-semibold">
-              {roles[index]}
+          {/* 🔥 ROLE (FIXED "I am" + animated text) */}
+          <div className="text-sm sm:text-base">
+            <span className="text-gray-600 dark:text-gray-300">
+              I am a{" "}
             </span>
+
+            <span className="text-purple-500 font-semibold">
+              <AnimatePresence mode="wait">
+                <AnimatedText text={roles[index]} key={roles[index]} />
+              </AnimatePresence>
+            </span>
+          </div>
+
+          {/* ✅ DESCRIPTION (LIGHT + DARK FIXED) */}
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            I build modern, responsive, and high-performance web applications
+            with clean UI and smooth user experience.
           </p>
 
-          {/* DESCRIPTION */}
-          <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xl mx-auto lg:mx-0">
-            I build modern, responsive, and high-performance web applications.
-          </p>
-
-          {/* SOCIAL ICONS (FIXED LIGHT + DARK) */}
-          <div className="flex gap-3 flex-wrap justify-center lg:justify-start mt-3">
-
+          {/* socials */}
+          <div className="flex gap-3 flex-wrap justify-center lg:justify-start mt-4">
             {socials.map((item, i) => {
               const Icon = item.icon;
 
@@ -93,16 +128,21 @@ export default function Banner() {
                   key={i}
                   href={item.link}
                   target="_blank"
-                  whileHover={{ scale: 1.15, y: -3 }}
+                  initial={{ opacity: 0, scale: 0.7 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: i * 0.08 }}
+                  whileHover={{
+                    scale: 1.15,
+                    y: -4,
+                    boxShadow: "0px 0px 18px rgba(59,130,246,0.5)",
+                  }}
                   whileTap={{ scale: 0.9 }}
-                  className="
-                    w-10 h-10 flex items-center justify-center rounded-full
-                    border border-gray-300 dark:border-white/15
-                    bg-white/70 dark:bg-white/5
-                    text-gray-700 dark:text-gray-200
-                    hover:bg-blue-500 hover:text-white
-                    backdrop-blur-md transition
-                  "
+                  className="w-10 h-10 flex items-center justify-center rounded-full
+                  border border-gray-300 dark:border-white/15
+                  bg-white/70 dark:bg-white/5
+                  text-gray-700 dark:text-gray-200
+                  hover:bg-blue-500 hover:text-white
+                  backdrop-blur-md transition"
                 >
                   <Icon className="text-lg" />
                 </motion.a>
@@ -110,39 +150,53 @@ export default function Banner() {
             })}
           </div>
 
-          {/* BUTTONS (RESPONSIVE FIXED) */}
-          <div className="flex flex-col sm:flex-row gap-3 mt-4 justify-center lg:justify-start">
+          {/* buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 mt-5 justify-center lg:justify-start">
 
             <Link href="/contact">
-              <button className="w-full sm:w-auto px-4 py-2 rounded-xl bg-blue-500 text-white text-sm flex items-center justify-center gap-2">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full sm:w-auto px-5 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 text-white text-sm flex items-center justify-center gap-2 shadow-md"
+              >
                 <HiRefresh /> Hire Me
-              </button>
+              </motion.button>
             </Link>
 
-            <button className="w-full sm:w-auto px-4 py-2 rounded-xl border border-gray-300 dark:border-white/20 text-sm flex items-center justify-center gap-2">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full sm:w-auto px-5 py-2 rounded-xl border border-gray-300 dark:border-white/20 text-sm flex items-center justify-center gap-2 hover:bg-black/5 dark:hover:bg-white/10"
+            >
               <FaDownload /> Resume
-            </button>
+            </motion.button>
 
           </div>
         </div>
 
-        {/* RIGHT IMAGE (SPACE FIXED + CLEAN GLOW) */}
+        {/* RIGHT IMAGE */}
         <div className="flex-1 flex justify-center lg:justify-end">
 
-          <div className="relative w-[200px] sm:w-[280px] md:w-[340px] lg:w-[400px]">
+          <div className="relative w-[220px] sm:w-[300px] md:w-[360px] lg:w-[420px]">
 
-            {/* CLEAN GLOW */}
             <div className="absolute inset-0 scale-90 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 blur-2xl opacity-25" />
 
             <motion.div
-              animate={{ y: [0, -3, 0] }}
-              transition={{ duration: 5, repeat: Infinity }}
+              animate={{
+                y: [0, -6, 0],
+                rotate: [0, 1.5, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
               className="relative"
             >
               <Image
                 src={profileImg}
                 alt="profile"
-                className="rounded-full border-4 border-white/10 w-full h-auto"
+                className="rounded-full border-4 border-white/10 w-full h-auto shadow-xl"
                 priority
               />
             </motion.div>

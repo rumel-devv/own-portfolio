@@ -3,13 +3,6 @@
 import { motion } from "framer-motion";
 import { FaCode } from "react-icons/fa";
 
-import {
-  SiReact,
-  SiNextdotjs,
-  SiJavascript,
-  SiTailwindcss,
-} from "react-icons/si";
-
 const timeline = [
   {
     year: "2024",
@@ -19,23 +12,16 @@ const timeline = [
   },
   {
     year: "2025",
-    title: "JavaScript & React Developer",
-    desc: "Built interactive frontend projects using React and modern JS.",
-    icon: SiReact,
+    title: "Frontend Developer",
+    desc: "Built interactive and responsive websites using modern JavaScript.",
+    icon: FaCode,
   },
   {
     year: "2026",
-    title: "Next.js Focused Developer",
-    desc: "Building production-level apps with Next.js and Tailwind CSS.",
-    icon: SiNextdotjs,
+    title: "Focused on Modern Web Apps",
+    desc: "Now building real-world, scalable and high-performance applications.",
+    icon: FaCode,
   },
-];
-
-const skills = [
-  { name: "JavaScript", icon: SiJavascript },
-  { name: "React", icon: SiReact },
-  { name: "Next.js", icon: SiNextdotjs },
-  { name: "Tailwind", icon: SiTailwindcss },
 ];
 
 export default function About() {
@@ -67,7 +53,7 @@ export default function About() {
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              className="p-5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md space-y-3"
+              className="p-5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md space-y-4"
             >
               <div className="flex items-center gap-2">
                 <FaCode className="text-blue-500 text-xl" />
@@ -77,42 +63,26 @@ export default function About() {
               </div>
 
               <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 leading-relaxed">
-                I started with curiosity about how websites work and slowly moved into frontend development.
+                My journey into web development started with pure curiosity — I always wondered how websites actually work behind the scenes.
               </p>
 
               <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 leading-relaxed">
-                From HTML & CSS to JavaScript and React, I kept improving step by step.
+                In the beginning, I explored <span className="text-blue-400">WordPress</span> and learned how to build websites without writing code. This gave me a basic understanding of layouts, design, and user experience.
               </p>
 
               <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 leading-relaxed">
-                Now I build modern apps using Next.js and Tailwind CSS.
+                But I quickly realized that to truly create powerful and customized applications, I needed to learn programming. That’s when I started learning HTML, CSS, and JavaScript seriously.
+              </p>
+
+              <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 leading-relaxed">
+                Step by step, I moved into frontend development, building responsive and interactive user interfaces and improving my problem-solving skills through real projects.
+              </p>
+
+              <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 leading-relaxed">
+                Now, I focus on building modern, fast, and scalable web applications while continuously learning new technologies and improving my development skills every day.
               </p>
             </motion.div>
 
-            {/* SKILLS */}
-            <div className="grid grid-cols-2 gap-3">
-
-              {skills.map((skill, i) => {
-                const Icon = skill.icon;
-
-                return (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: i * 0.1 }}
-                    className="flex flex-col items-center gap-2 p-4 rounded-lg 
-                    bg-white/5 border border-white/10 backdrop-blur-md"
-                  >
-                    <Icon className="text-blue-500 text-2xl md:text-3xl" />
-                    <span className="text-xs md:text-sm">
-                      {skill.name}
-                    </span>
-                  </motion.div>
-                );
-              })}
-
-            </div>
           </div>
 
           {/* RIGHT TIMELINE */}

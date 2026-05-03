@@ -49,7 +49,6 @@ export default function Education() {
       {/* TIMELINE */}
       <div className="relative max-w-5xl mx-auto z-10">
 
-        {/* vertical line */}
         <div className="absolute left-3 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-500/40 via-purple-500/20 to-transparent" />
 
         <div className="space-y-8 md:space-y-12">
@@ -70,31 +69,40 @@ export default function Education() {
 
               {/* CARD */}
               <div
-                className="w-full md:w-[45%] p-4 md:p-5 rounded-xl
-                bg-white/5 border border-white/10 backdrop-blur-xl
-                hover:scale-[1.02] transition"
+                className="
+                  group relative w-full md:w-[45%] p-4 md:p-5 rounded-xl
+                  bg-white/5 border border-white/10 backdrop-blur-xl
+                  transition duration-300 hover:scale-[1.02]
+                "
               >
 
-                {/* YEAR */}
-                <div className="flex items-center gap-2 text-blue-500 mb-1">
-                  <FaGraduationCap className="text-sm" />
-                  <span className="text-xs md:text-sm">{item.year}</span>
+                {/* 🔥 HOVER GLOW (like contact section) */}
+                <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition duration-300 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.25),transparent_70%)]" />
+
+                <div className="relative z-10">
+
+                  {/* YEAR */}
+                  <div className="flex items-center gap-2 text-blue-500 mb-1">
+                    <FaGraduationCap className="text-sm" />
+                    <span className="text-xs md:text-sm">{item.year}</span>
+                  </div>
+
+                  {/* TITLE */}
+                  <h3 className="text-base md:text-lg font-semibold">
+                    {item.title}
+                  </h3>
+
+                  {/* INSTITUTE */}
+                  <p className="text-xs md:text-sm text-gray-400">
+                    {item.institute}
+                  </p>
+
+                  {/* DESCRIPTION */}
+                  <p className="text-sm text-gray-500 mt-2 leading-relaxed">
+                    {item.desc}
+                  </p>
+
                 </div>
-
-                {/* TITLE */}
-                <h3 className="text-base md:text-lg font-semibold">
-                  {item.title}
-                </h3>
-
-                {/* INSTITUTE */}
-                <p className="text-xs md:text-sm text-gray-400">
-                  {item.institute}
-                </p>
-
-                {/* DESCRIPTION */}
-                <p className="text-sm md:text-sm text-gray-500 mt-2 leading-relaxed">
-                  {item.desc}
-                </p>
 
               </div>
 
