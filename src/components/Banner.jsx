@@ -164,7 +164,7 @@ export default function Banner() {
         </div>
 
         {/* buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 mt-6">
+        <div className="flex flex-row  gap-3 mt-6">
 
           <Link href="https://wa.me/8801745671928">
             <motion.button
@@ -175,14 +175,16 @@ export default function Banner() {
               <HiRefresh /> Hire Me
             </motion.button>
           </Link>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-5 py-2 rounded-xl border border-gray-300 dark:border-white/20 text-sm flex items-center justify-center gap-2 hover:bg-black/5 dark:hover:bg-white/10"
-          >
-            <FaDownload /> Resume
-          </motion.button>
+<motion.a
+  href="/resume.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  className="px-5 py-2 rounded-xl border border-gray-300 dark:border-white/20 text-sm flex items-center justify-center gap-2 hover:bg-black/5 dark:hover:bg-white/10"
+>
+  <FaDownload /> Resume
+</motion.a>
 
         </div>
       </div>

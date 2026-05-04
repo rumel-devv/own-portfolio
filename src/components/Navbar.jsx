@@ -112,7 +112,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* ================= MOBILE MENU (FIXED ANIMATION) ================= */}
+      {/* ================= MOBILE MENU (GLASS EFFECT) ================= */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -122,14 +122,16 @@ export default function Navbar() {
             transition={{ duration: 0.25 }}
             className="
               md:hidden fixed top-0 left-0 w-full z-40
-              bg-white dark:bg-gray-900
-              shadow-xl rounded-b-2xl
+              bg-white/70 dark:bg-black/60
+              backdrop-blur-xl backdrop-saturate-150
+              border-b border-white/20 dark:border-white/10
+              shadow-lg rounded-b-2xl
               px-6 pt-20 pb-8
             "
           >
             <div className="flex flex-col gap-6">
 
-              {navItems.map((item, i) => {
+              {navItems.map((item) => {
                 const Icon = item.icon;
 
                 return (

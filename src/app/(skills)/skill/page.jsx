@@ -69,7 +69,7 @@ export default function SkillsSection() {
         </p>
       </div>
 
-      {/* 🔥 TOGGLE (FIXED LIGHT + DARK) */}
+      {/* TOGGLE */}
       <div className="flex justify-center mb-12">
         <div className="relative flex rounded-full p-1 
           bg-gray-100 dark:bg-white/5 
@@ -77,7 +77,6 @@ export default function SkillsSection() {
           backdrop-blur-xl
         ">
 
-          {/* active bg */}
           <motion.div
             layout
             className="absolute top-1 bottom-1 rounded-full 
@@ -122,16 +121,14 @@ export default function SkillsSection() {
           return (
             <motion.div
               key={skill.name}
-              initial={{ opacity: 0, x: -40 }}
+              initial={false}   // ✅ FIXED double animation
               animate={{ opacity: 1, x: 0 }}
               transition={{
-                duration: 0.5,
-                delay: i * 0.08,
+                duration: 0.4,
+                delay: i * 0.06,
                 ease: "easeOut",
               }}
-              whileHover={{
-                y: -8,
-              }}
+              whileHover={{ y: -8 }}
               className="
                 group relative p-5 rounded-2xl
                 bg-white/70 dark:bg-white/5
@@ -143,7 +140,7 @@ export default function SkillsSection() {
               "
             >
 
-              {/* glow */}
+              {/* glow background */}
               <div className="
                 absolute inset-0 opacity-0 group-hover:opacity-100
                 bg-blue-500/10 blur-3xl transition duration-700
@@ -168,13 +165,24 @@ export default function SkillsSection() {
 
               </div>
 
-              {/* border glow */}
-              <div className="
-                absolute inset-0 rounded-2xl
-                border border-transparent
-                group-hover:border-blue-500/40
-                transition
-              " />
+              {/* 🔥 always glowing border */}
+              <div className="absolute inset-0 rounded-2xl pointer-events-none">
+                
+                {/* always visible subtle border */}
+                <div className="
+                  absolute inset-0 rounded-2xl
+                  border border-blue-500/20
+                " />
+
+                {/* hover stronger glow */}
+                <div className="
+                  absolute inset-0 rounded-2xl
+                  opacity-0 group-hover:opacity-100
+                  transition duration-300
+                  bg-blue-500/20 blur-[6px]
+                " />
+
+              </div>
 
             </motion.div>
           );

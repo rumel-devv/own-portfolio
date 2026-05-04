@@ -43,7 +43,7 @@ const projects = [
       { name: "Node.js", icon: FaNodeJs },
       { name: "Code", icon: FaCode },
     ],
-    demo: "#",
+    demo: "https://payoomobileapp.vercel.app",
     github: "#",
   },
   {
