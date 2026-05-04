@@ -64,18 +64,25 @@ export default function SkillsSection() {
         <h2 className="text-4xl md:text-6xl font-bold">
           My <span className="text-blue-500">Skills</span>
         </h2>
-        <p className="text-gray-500 mt-3">
+        <p className="text-gray-600 dark:text-gray-400 mt-3">
           Technologies I use to build modern apps
         </p>
       </div>
 
-      {/* TOGGLE */}
+      {/* 🔥 TOGGLE (FIXED LIGHT + DARK) */}
       <div className="flex justify-center mb-12">
-        <div className="relative flex rounded-full p-1 bg-white/5 border border-white/10 backdrop-blur-xl">
+        <div className="relative flex rounded-full p-1 
+          bg-gray-100 dark:bg-white/5 
+          border border-gray-300 dark:border-white/10 
+          backdrop-blur-xl
+        ">
 
+          {/* active bg */}
           <motion.div
             layout
-            className="absolute top-1 bottom-1 rounded-full bg-blue-500/20"
+            className="absolute top-1 bottom-1 rounded-full 
+              bg-blue-500/20 dark:bg-blue-500/30
+            "
             style={{
               width: "33.33%",
               left:
@@ -92,11 +99,13 @@ export default function SkillsSection() {
             <button
               key={item}
               onClick={() => setActive(item)}
-              className={`relative z-10 px-6 py-2 text-sm capitalize transition ${
-                active === item
-                  ? "text-white font-medium"
-                  : "text-gray-400 hover:text-white"
-              }`}
+              className={`relative z-10 px-6 py-2 text-sm capitalize rounded-full transition-all duration-300
+                ${
+                  active === item
+                    ? "text-blue-600 dark:text-white font-semibold"
+                    : "text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-white"
+                }
+              `}
             >
               {item}
             </button>
@@ -113,8 +122,6 @@ export default function SkillsSection() {
           return (
             <motion.div
               key={skill.name}
-
-              /* 🔥 NEW WAVE ANIMATION (DIFFERENT STYLE) */
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{
@@ -122,34 +129,30 @@ export default function SkillsSection() {
                 delay: i * 0.08,
                 ease: "easeOut",
               }}
-
-              /* FLOAT HOVER (NOT SCALE) */
               whileHover={{
                 y: -8,
               }}
-
               className="
                 group relative p-5 rounded-2xl
-                bg-white/5 border border-white/10
+                bg-white/70 dark:bg-white/5
+                border border-gray-200 dark:border-white/10
                 backdrop-blur-xl
                 overflow-hidden
                 cursor-pointer
+                transition
               "
             >
 
-              {/* soft pulse glow (new style) */}
+              {/* glow */}
               <div className="
                 absolute inset-0 opacity-0 group-hover:opacity-100
                 bg-blue-500/10 blur-3xl transition duration-700
-                animate-pulse
               " />
 
               <div className="relative z-10 flex flex-col items-center gap-3">
 
                 <motion.div
-                  animate={{
-                    y: [0, -3, 0],
-                  }}
+                  animate={{ y: [0, -3, 0] }}
                   transition={{
                     repeat: Infinity,
                     duration: 2,
@@ -159,7 +162,7 @@ export default function SkillsSection() {
                   <Icon className="text-blue-500 text-3xl" />
                 </motion.div>
 
-                <span className="text-sm text-gray-300 group-hover:text-blue-400 transition">
+                <span className="text-sm text-gray-700 dark:text-gray-300 group-hover:text-blue-500 transition">
                   {skill.name}
                 </span>
 
