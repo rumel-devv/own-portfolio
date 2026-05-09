@@ -19,7 +19,7 @@ import profileImg from "@/assets/banner.png";
 import StarBackground from "./StarBackground";
 import Link from "next/link";
 
-const roles = ["Frontend Developer", "Mern Stack Developer"];
+const roles = ["Frontend Developer", "MERN Stack Developer"];
 
 const container = {
   hidden: {},
@@ -72,28 +72,18 @@ export default function Banner() {
   return (
     <section className="relative flex flex-col items-center justify-center px-4 py-20 overflow-hidden bg-background text-foreground dark:bg-gradient-to-br dark:from-[#0b0f1a] dark:via-[#05070d] dark:to-black">
 
-      {/* BG */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.15),transparent_60%)] animate-pulse opacity-60" />
       <StarBackground />
 
       <div className="relative z-10 flex flex-col items-center text-center max-w-2xl w-full">
 
-        {/* 🔥 IMAGE TOP */}
-        <div className="relative w-[160px] sm:w-[250px] mb-6">
+        {/* IMAGE */}
+        <div className="relative w-[250px] sm:w-[360px] mb-6">
 
-          {/* gradient circle */}
           <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 blur-xl opacity-40 scale-110" />
 
           <motion.div
-            animate={{
-              y: [0, -6, 0],
-              rotate: [0, 1.5, 0],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            animate={{ y: [0, -6, 0], rotate: [0, 1.5, 0] }}
+            transition={{ duration: 6, repeat: Infinity }}
             className="relative"
           >
             <Image
@@ -105,88 +95,140 @@ export default function Banner() {
           </motion.div>
         </div>
 
-        {/* badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 dark:bg-white/10 border border-green-200 dark:border-white/10 backdrop-blur-md">
+        {/* 🔥 BADGE (ANIMATED + THEME SAFE) */}
+        <motion.div
+          animate={{ y: [0, -3, 0] }}
+          transition={{
+            duration: 2.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+            inline-flex items-center gap-2 px-3 py-1 rounded-full
+            bg-white/10 dark:bg-white/5
+            border border-gray-300/40 dark:border-white/10
+            backdrop-blur-md
+          "
+        >
           <FaCircle className="text-green-500 dark:text-green-400 text-xs animate-pulse" />
-          <span className="text-xs sm:text-sm text-green-700 dark:text-gray-300">
-            Available for Work
+          <span className="text-xs sm:text-sm text-gray-800 dark:text-gray-300">
+            Open to Freelance & Remote Opportunities
           </span>
-        </div>
+        </motion.div>
 
-        {/* name */}
+        {/* NAME */}
         <h1 className="text-2xl sm:text-4xl font-bold mt-4">
-          Hi, I am <span className="text-blue-400">Muhammed Rumel</span>
+          Hi, I’m{" "}
+          <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+            Muhammed Rumel
+          </span>
         </h1>
 
-        {/* role */}
+        {/* ROLE */}
         <div className="text-sm sm:text-base mt-2">
-          <span className="text-gray-600 dark:text-gray-300">
-            I am a{" "}
+          <span className="text-gray-700 dark:text-gray-400">
+            Specialized as a {" "}
           </span>
-          <span className="text-purple-500 font-semibold">
+
+          <span className="bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 bg-clip-text text-transparent font-semibold">
             <AnimatePresence mode="wait">
               <AnimatedText text={roles[index]} key={roles[index]} />
             </AnimatePresence>
           </span>
         </div>
 
-        {/* description */}
-        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-3 leading-relaxed">
-          I build modern, responsive, and high-performance web applications
-          with clean UI and smooth user experience.
+        {/* DESCRIPTION */}
+        <p className="text-sm sm:text-base text-gray-700 dark:text-gray-400 mt-3 leading-relaxed">
+          I design and develop modern, responsive, and high-performance web applications
+          with a strong focus on clean UI, scalability, and smooth user experience.
         </p>
 
-        {/* socials */}
-        <div className="flex gap-3 flex-wrap justify-center mt-5">
-          {socials.map((item, i) => {
-            const Icon = item.icon;
+        {/* SOCIALS (FIXED LIGHT + DARK MODE) */}
+ <div className="flex gap-3 flex-wrap justify-center mt-5">
 
-            return (
-              <motion.a
-                key={i}
-                href={item.link}
-                target="_blank"
-                initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.08 }}
-                whileHover={{
-                  scale: 1.15,
-                  y: -4,
-                  boxShadow: "0px 0px 18px rgba(59,130,246,0.5)",
-                }}
-                whileTap={{ scale: 0.9 }}
-                className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 dark:border-white/15 bg-white/70 dark:bg-white/5 text-gray-700 dark:text-gray-200 hover:bg-blue-500 hover:text-white backdrop-blur-md transition"
-              >
-                <Icon className="text-lg" />
-              </motion.a>
-            );
-          })}
-        </div>
+  {socials.map((item, i) => {
+    const Icon = item.icon;
 
-        {/* buttons */}
-        <div className="flex flex-row  gap-3 mt-6">
+    return (
+      <motion.a
+        key={i}
+        href={item.link}
+        target="_blank"
+        initial={{ opacity: 0, y: 10, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{
+          duration: 0.4,
+          delay: i * 0.06,
+          ease: "easeOut",
+        }}
+        whileHover={{
+          scale: 1.18,
+          y: -6,
+        }}
+        whileTap={{ scale: 0.95 }}
+        className="
+          p-[1px] rounded-full border-2
+          border-gradient-to-r from-cyan-400 via-blue-500 to-purple-500
+        "
+      >
+        <motion.div
+          animate={{
+            y: [0, -2, 0],
+          }}
+          transition={{
+            duration: 3 + i * 0.2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+            w-10 h-10 flex items-center justify-center
+            rounded-full
+
+            bg-white/90 dark:bg-white/5
+            backdrop-blur-md
+
+            border border-gray-300/50 dark:border-white/10
+
+            text-gray-800 dark:text-gray-200
+
+            hover:text-white hover:bg-gradient-to-r hover:from-cyan-500 hover:to-purple-500
+
+            transition
+          "
+        >
+          <Icon className="text-lg" />
+        </motion.div>
+      </motion.a>
+    );
+  })}
+
+</div>
+        {/* BUTTONS */}
+        <div className="flex flex-row gap-3 mt-6">
 
           <Link href="https://wa.me/8801745671928">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-5 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 text-white text-sm flex items-center justify-center gap-2 shadow-md"
+              className="px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm flex items-center justify-center gap-2 shadow-md"
             >
               <HiRefresh /> Hire Me
             </motion.button>
           </Link>
-<motion.a
-  href="/resume.pdf"
-  target="_blank"
-  rel="noopener noreferrer"
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  className="px-5 py-2 rounded-xl border border-gray-300 dark:border-white/20 text-sm flex items-center justify-center gap-2 hover:bg-black/5 dark:hover:bg-white/10"
->
-  <FaDownload /> Resume
-</motion.a>
+
+          <motion.a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-5 py-2 rounded-xl border border-gray-300 dark:border-white/20 text-sm flex items-center justify-center gap-2 hover:bg-black/5 dark:hover:bg-gradient-to-r from-cyan-500 to-blue-600"
+          >
+            <FaDownload /> Resume
+          </motion.a>
 
         </div>
+
       </div>
     </section>
   );
